@@ -1,6 +1,10 @@
 package co.id.desktopui;
 
+import co.id.desktopui.master.DocterList;
+import co.id.desktopui.master.InpatientList;
+import co.id.desktopui.master.OfficerList;
 import co.id.desktopui.master.PatientList;
+import co.id.desktopui.master.PaymentList;
 
 /**
  *
@@ -8,7 +12,11 @@ import co.id.desktopui.master.PatientList;
  */
 public class Menu extends javax.swing.JFrame {
 
+    public final DocterList docterList = new DocterList();
+    public final InpatientList inpatientList = new InpatientList();
+    public final OfficerList officerList = new OfficerList();
     public final PatientList patientList = new PatientList();
+    public final PaymentList paymentList = new PaymentList();
     
     public Menu() {
         initComponents();
@@ -38,10 +46,9 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,6 +60,25 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel5.setLayout(new java.awt.BorderLayout());
 
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Menu Hospital");
+        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Master");
+        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Docter");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Inpatient");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Officer");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Patient");
+        treeNode2.add(treeNode3);
+        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Payment");
+        treeNode2.add(treeNode3);
+        treeNode1.add(treeNode2);
+        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jTree1.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener() {
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt) {
+                jTree1ValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTree1);
 
         jSplitPane1.setLeftComponent(jScrollPane1);
@@ -80,7 +106,7 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu3.setText("Master");
 
-        jMenuItem1.setText("Patient");
+        jMenuItem1.setText("Docter");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -88,27 +114,44 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem1);
 
-        jMenuItem2.setText("Tahap Pengembangan");
+        jMenuItem2.setText("Inpatient");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem3.setText("Tahap Pengembangan");
+        jMenuItem3.setText("Officer");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem3);
 
-        jMenuItem4.setText("Tahap Pengembangan");
+        jMenuItem4.setText("Patient");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem4);
+
+        jMenuItem5.setText("Payment");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
 
         jMenu1.add(jMenu3);
 
         jMenu4.setText("Transaksi");
 
-        jMenuItem5.setText("Tahap Pengembangan");
-        jMenu4.add(jMenuItem5);
-
         jMenuItem6.setText("Tahap Pengembangan");
         jMenu4.add(jMenuItem6);
-
-        jMenuItem7.setText("Tahap Pengembangan");
-        jMenu4.add(jMenuItem7);
 
         jMenu1.add(jMenu4);
 
@@ -123,14 +166,86 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        if(jMenuItem1.getText().equals("Patient") == true){
+        if(jMenuItem1.getText().equals("Docter") == true){
+            jTabbedPane1.addTab("Menu Docter", docterList);
+            jTabbedPane1.setSelectedComponent(docterList);
+        }else{
+            jTabbedPane1.setSelectedComponent(docterList);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if(jMenuItem2.getText().equals("Inpatient") == true){
+            jTabbedPane1.addTab("Menu Inpatient", inpatientList);
+            jTabbedPane1.setSelectedComponent(inpatientList);
+        }else{
+            jTabbedPane1.setSelectedComponent(inpatientList);
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        if(jMenuItem3.getText().equals("Officer") == true){
+            jTabbedPane1.addTab("Menu Officer", officerList);
+            jTabbedPane1.setSelectedComponent(officerList);
+        }else{
+            jTabbedPane1.setSelectedComponent(officerList);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        if(jMenuItem4.getText().equals("Patient") == true){
             jTabbedPane1.addTab("Menu Patient", patientList);
             jTabbedPane1.setSelectedComponent(patientList);
         }else{
             jTabbedPane1.setSelectedComponent(patientList);
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        if(jMenuItem5.getText().equals("Payment") == true){
+            jTabbedPane1.addTab("Menu Payment", paymentList);
+            jTabbedPane1.setSelectedComponent(paymentList);
+        }else{
+            jTabbedPane1.setSelectedComponent(paymentList);
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jTree1ValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTree1ValueChanged
+        String nodePath = evt.getPath().toString();
+   
+        int index = jTabbedPane1.indexOfTab(jTree1.getSelectionPath().getLastPathComponent().toString());
+    
+        if(index == -1){
+            displayProjectDetails(jTree1.getSelectionPath().getLastPathComponent().toString(),nodePath);
+        }else{
+            jTabbedPane1.setSelectedIndex(index);
+        }
+    }//GEN-LAST:event_jTree1ValueChanged
+
+    private void displayProjectDetails(String projectName,String nodePath){
+        if(nodePath.contains("Menu Hospital")) {
+   
+            if(nodePath.contains("Master")) { 
+                if(projectName.equals("Docter")){
+                    jTabbedPane1.addTab("Docter", docterList);
+                    jTabbedPane1.setSelectedComponent(docterList);
+                }else if(projectName.equals("Inpatient")){
+                    jTabbedPane1.addTab("Inpatient", inpatientList);
+                    jTabbedPane1.setSelectedComponent(inpatientList);
+                }else if(projectName.equals("Officer")){
+                    jTabbedPane1.addTab("Officer", officerList);
+                    jTabbedPane1.setSelectedComponent(officerList);
+                }else if(projectName.equals("Patient")){
+                    jTabbedPane1.addTab("Patient", patientList);
+                    jTabbedPane1.setSelectedComponent(patientList);
+                }else if(projectName.equals("Payment")){
+                    jTabbedPane1.addTab("Payment", paymentList);
+                    jTabbedPane1.setSelectedComponent(paymentList);
+                } 
+            }
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -143,7 +258,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

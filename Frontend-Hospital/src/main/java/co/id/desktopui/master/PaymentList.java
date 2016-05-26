@@ -1,9 +1,9 @@
 package co.id.desktopui.master;
 
-import co.id.model.Patient;
-import co.id.service.PatientService;
-import co.id.service.impl.PatientServiceImpl;
-import co.id.tm.PatientTM;
+import co.id.model.Payment;
+import co.id.service.PaymentService;
+import co.id.service.impl.PaymentServiceImpl;
+import co.id.tm.PaymentTM;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.JOptionPane;
@@ -21,22 +21,22 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author tekosulaiman@yahoo.com
  */
-public class PatientList extends javax.swing.JPanel {
+public class PaymentList extends javax.swing.JPanel {
 
-    private Patient patient;
-    private List<Patient> patients;
-    private PatientService patientService = new PatientServiceImpl();
-    private PatientTM patientTM = new PatientTM();
+    private Payment payment;
+    private List<Payment> payments;
+    private PaymentService paymentService = new PaymentServiceImpl();
+    private PaymentTM paymentTM = new PaymentTM();
 
-    private TableRowSorter tableRowSorter = new TableRowSorter<PatientTM>(patientTM);
+    private TableRowSorter tableRowSorter = new TableRowSorter<PaymentTM>(paymentTM);
     
-    public PatientList() {
+    public PaymentList() {
         initComponents();
         
         jTable1.setRowSorter(tableRowSorter);
         
-        patientTM.setList(patientService.getAllPatients());
-        jTable1.setModel(patientTM);
+        paymentTM.setList(paymentService.getAllPayments());
+        jTable1.setModel(paymentTM);
     }
 
     @SuppressWarnings("unchecked")
@@ -173,14 +173,14 @@ public class PatientList extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
     //Add
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        patient = new Patient();
-        System.out.println("ID Patient >>>"+patient.getIdpatient());
+        payment = new Payment();
+        System.out.println("ID Payment >>>"+payment.getIdpayment());
         
         int row = jTable1.getSelectedRow();
         
         if(row == -1){
-            PatientForm patientForm = new PatientForm(this);
-            patientForm.setVisible(true);
+//            PatientForm patientForm = new PatientForm(this);
+//            patientForm.setVisible(true);
         }else{
             
         }
@@ -193,27 +193,27 @@ public class PatientList extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,  "No Record Selected");
             return;
         }else{
-            PatientForm patientForm = new PatientForm(this);
- 
-            patient = patientTM.getList(row);
-            
-            System.out.println("Model >>>"+patient);
-            
-            patientForm.getjTextField3().setEnabled(false);
-            patientForm.getjTextField3().setText(patient.getIdpatient());
-            patientForm.getjTextField1().setText(patient.getNamepatient());
-            patientForm.getjSpinner1().setValue(patient.getAge());
-
-            if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Laki - laki") == true){
-                patientForm.getjRadioButton1().setSelected(true);
-            }else if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Perempuan") == true){
-                patientForm.getjRadioButton2().setSelected(true);
-            }
-            
-            patientForm.getjXDatePicker1().setDate(patient.getBod());
-            patientForm.getjTextField2().setText(patient.getAddres());
-            
-            patientForm.setVisible(true);
+//            PatientForm patientForm = new PatientForm(this);
+// 
+//            patient = patientTM.getList(row);
+//            
+//            System.out.println("Model >>>"+patient);
+//            
+//            patientForm.getjTextField3().setEnabled(false);
+//            patientForm.getjTextField3().setText(patient.getIdpatient());
+//            patientForm.getjTextField1().setText(patient.getNamepatient());
+//            patientForm.getjSpinner1().setValue(patient.getAge());
+//
+//            if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Laki - laki") == true){
+//                patientForm.getjRadioButton1().setSelected(true);
+//            }else if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Perempuan") == true){
+//                patientForm.getjRadioButton2().setSelected(true);
+//            }
+//            
+//            patientForm.getjXDatePicker1().setDate(patient.getBod());
+//            patientForm.getjTextField2().setText(patient.getAddres());
+//            
+//            patientForm.setVisible(true);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     //Delete
@@ -225,12 +225,12 @@ public class PatientList extends javax.swing.JPanel {
             return;
         }else{
             try {
-                Patient patient = patientTM.getList(row);
+                Payment payment = paymentTM.getList(row);
             
-                patientService.delete(patient);
+                paymentService.delete(payment);
                 
                 //Refresh
-                patientTM.refreshAfterDelete(row);
+                paymentTM.refreshAfterDelete(row);
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null,  "Data tidak bisa di Delete, karena sudah dipakai di table lain!","Error",JOptionPane.ERROR_MESSAGE);
                 return;
@@ -239,15 +239,15 @@ public class PatientList extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
     //Refresh
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        patientTM.setList(patientService.getAllPatients());
+        paymentTM.setList(paymentService.getAllPayments());
         
         jTable1.clearSelection();
     }//GEN-LAST:event_jButton5ActionPerformed
     //Print
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {    
-            JRBeanCollectionDataSource jRBeanCollectionDataSource = new JRBeanCollectionDataSource(patientService.getAllPatients());
-            String source = System.getProperty("user.dir") + "/src/main/resources/report/PatientReport.jrxml";
+            JRBeanCollectionDataSource jRBeanCollectionDataSource = new JRBeanCollectionDataSource(paymentService.getAllPayments());
+            String source = System.getProperty("user.dir") + "/src/report/PatientReport.jrxml";
             
             JasperReport jasperReport = JasperCompileManager.compileReport(source);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jRBeanCollectionDataSource);
@@ -279,36 +279,36 @@ public class PatientList extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    public Patient getPatient() {
-        return patient;
+    public Payment getPayment() {
+        return payment;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
-    public List<Patient> getPatients() {
-        return patients;
+    public List<Payment> getPayments() {
+        return payments;
     }
 
-    public void setPatients(List<Patient> patients) {
-        this.patients = patients;
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 
-    public PatientService getPatientService() {
-        return patientService;
+    public PaymentService getPaymentService() {
+        return paymentService;
     }
 
-    public void setPatientService(PatientService patientService) {
-        this.patientService = patientService;
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
     }
 
-    public PatientTM getPatientTM() {
-        return patientTM;
+    public PaymentTM getPaymentTM() {
+        return paymentTM;
     }
 
-    public void setPatientTM(PatientTM patientTM) {
-        this.patientTM = patientTM;
+    public void setPaymentTM(PaymentTM paymentTM) {
+        this.paymentTM = paymentTM;
     }
 
     public JTable getjTable1() {

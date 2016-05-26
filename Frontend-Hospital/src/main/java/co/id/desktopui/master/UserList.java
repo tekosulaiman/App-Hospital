@@ -1,9 +1,9 @@
 package co.id.desktopui.master;
 
-import co.id.model.Patient;
-import co.id.service.PatientService;
-import co.id.service.impl.PatientServiceImpl;
-import co.id.tm.PatientTM;
+import co.id.model.User;
+import co.id.service.UserService;
+import co.id.service.impl.UserServiceImpl;
+import co.id.tm.UserTM;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
 import javax.swing.JOptionPane;
@@ -21,22 +21,22 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author tekosulaiman@yahoo.com
  */
-public class PatientList extends javax.swing.JPanel {
+public class UserList extends javax.swing.JPanel {
 
-    private Patient patient;
-    private List<Patient> patients;
-    private PatientService patientService = new PatientServiceImpl();
-    private PatientTM patientTM = new PatientTM();
+    private User user;
+    private List<User> users;
+    private UserService userService = new UserServiceImpl();
+    private UserTM userTM = new UserTM();
 
-    private TableRowSorter tableRowSorter = new TableRowSorter<PatientTM>(patientTM);
+    private TableRowSorter tableRowSorter = new TableRowSorter<UserTM>(userTM);
     
-    public PatientList() {
+    public UserList() {
         initComponents();
         
         jTable1.setRowSorter(tableRowSorter);
         
-        patientTM.setList(patientService.getAllPatients());
-        jTable1.setModel(patientTM);
+        userTM.setList(userService.getAllUsers());
+        jTable1.setModel(userTM);
     }
 
     @SuppressWarnings("unchecked")
@@ -173,14 +173,14 @@ public class PatientList extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
     //Add
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        patient = new Patient();
-        System.out.println("ID Patient >>>"+patient.getIdpatient());
+        user = new User();
+        System.out.println("ID User >>>"+user.getIduser());
         
         int row = jTable1.getSelectedRow();
         
         if(row == -1){
-            PatientForm patientForm = new PatientForm(this);
-            patientForm.setVisible(true);
+//            PatientForm patientForm = new PatientForm(this);
+//            patientForm.setVisible(true);
         }else{
             
         }
@@ -193,27 +193,27 @@ public class PatientList extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,  "No Record Selected");
             return;
         }else{
-            PatientForm patientForm = new PatientForm(this);
- 
-            patient = patientTM.getList(row);
-            
-            System.out.println("Model >>>"+patient);
-            
-            patientForm.getjTextField3().setEnabled(false);
-            patientForm.getjTextField3().setText(patient.getIdpatient());
-            patientForm.getjTextField1().setText(patient.getNamepatient());
-            patientForm.getjSpinner1().setValue(patient.getAge());
-
-            if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Laki - laki") == true){
-                patientForm.getjRadioButton1().setSelected(true);
-            }else if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Perempuan") == true){
-                patientForm.getjRadioButton2().setSelected(true);
-            }
-            
-            patientForm.getjXDatePicker1().setDate(patient.getBod());
-            patientForm.getjTextField2().setText(patient.getAddres());
-            
-            patientForm.setVisible(true);
+//            PatientForm patientForm = new PatientForm(this);
+// 
+//            patient = patientTM.getList(row);
+//            
+//            System.out.println("Model >>>"+patient);
+//            
+//            patientForm.getjTextField3().setEnabled(false);
+//            patientForm.getjTextField3().setText(patient.getIdpatient());
+//            patientForm.getjTextField1().setText(patient.getNamepatient());
+//            patientForm.getjSpinner1().setValue(patient.getAge());
+//
+//            if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Laki - laki") == true){
+//                patientForm.getjRadioButton1().setSelected(true);
+//            }else if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Perempuan") == true){
+//                patientForm.getjRadioButton2().setSelected(true);
+//            }
+//            
+//            patientForm.getjXDatePicker1().setDate(patient.getBod());
+//            patientForm.getjTextField2().setText(patient.getAddres());
+//            
+//            patientForm.setVisible(true);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     //Delete
@@ -225,12 +225,12 @@ public class PatientList extends javax.swing.JPanel {
             return;
         }else{
             try {
-                Patient patient = patientTM.getList(row);
+                User user = userTM.getList(row);
             
-                patientService.delete(patient);
+                userService.delete(user);
                 
                 //Refresh
-                patientTM.refreshAfterDelete(row);
+                userTM.refreshAfterDelete(row);
             } catch (Exception exception) {
                 JOptionPane.showMessageDialog(null,  "Data tidak bisa di Delete, karena sudah dipakai di table lain!","Error",JOptionPane.ERROR_MESSAGE);
                 return;
@@ -239,15 +239,15 @@ public class PatientList extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton4ActionPerformed
     //Refresh
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        patientTM.setList(patientService.getAllPatients());
+        userTM.setList(userService.getAllUsers());
         
         jTable1.clearSelection();
     }//GEN-LAST:event_jButton5ActionPerformed
-    //Print
+    //Print --- Still ERROR
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {    
-            JRBeanCollectionDataSource jRBeanCollectionDataSource = new JRBeanCollectionDataSource(patientService.getAllPatients());
-            String source = System.getProperty("user.dir") + "/src/main/resources/report/PatientReport.jrxml";
+            JRBeanCollectionDataSource jRBeanCollectionDataSource = new JRBeanCollectionDataSource(userService.getAllUsers());
+            String source = System.getProperty("user.dir") + "/src/report/PatientReport.jrxml";
             
             JasperReport jasperReport = JasperCompileManager.compileReport(source);
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, jRBeanCollectionDataSource);
@@ -279,36 +279,36 @@ public class PatientList extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
-    public Patient getPatient() {
-        return patient;
+    public User getUser() {
+        return user;
     }
 
-    public void setPatient(Patient patient) {
-        this.patient = patient;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public List<Patient> getPatients() {
-        return patients;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setPatients(List<Patient> patients) {
-        this.patients = patients;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
-    public PatientService getPatientService() {
-        return patientService;
+    public UserService getUserService() {
+        return userService;
     }
 
-    public void setPatientService(PatientService patientService) {
-        this.patientService = patientService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
     }
 
-    public PatientTM getPatientTM() {
-        return patientTM;
+    public UserTM getUserTM() {
+        return userTM;
     }
 
-    public void setPatientTM(PatientTM patientTM) {
-        this.patientTM = patientTM;
+    public void setUserTM(UserTM userTM) {
+        this.userTM = userTM;
     }
 
     public JTable getjTable1() {
