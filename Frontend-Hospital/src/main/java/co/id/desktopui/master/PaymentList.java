@@ -37,6 +37,9 @@ public class PaymentList extends javax.swing.JPanel {
         
         paymentTM.setList(paymentService.getAllPayments());
         jTable1.setModel(paymentTM);
+        
+        jButton2.setVisible(false);
+        jButton3.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -179,8 +182,7 @@ public class PaymentList extends javax.swing.JPanel {
         int row = jTable1.getSelectedRow();
         
         if(row == -1){
-//            PatientForm patientForm = new PatientForm(this);
-//            patientForm.setVisible(true);
+            
         }else{
             
         }
@@ -193,27 +195,7 @@ public class PaymentList extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,  "No Record Selected");
             return;
         }else{
-//            PatientForm patientForm = new PatientForm(this);
-// 
-//            patient = patientTM.getList(row);
-//            
-//            System.out.println("Model >>>"+patient);
-//            
-//            patientForm.getjTextField3().setEnabled(false);
-//            patientForm.getjTextField3().setText(patient.getIdpatient());
-//            patientForm.getjTextField1().setText(patient.getNamepatient());
-//            patientForm.getjSpinner1().setValue(patient.getAge());
-//
-//            if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Laki - laki") == true){
-//                patientForm.getjRadioButton1().setSelected(true);
-//            }else if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Perempuan") == true){
-//                patientForm.getjRadioButton2().setSelected(true);
-//            }
-//            
-//            patientForm.getjXDatePicker1().setDate(patient.getBod());
-//            patientForm.getjTextField2().setText(patient.getAddres());
-//            
-//            patientForm.setVisible(true);
+            
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     //Delete

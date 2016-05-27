@@ -180,8 +180,8 @@ public class DocterList extends javax.swing.JPanel {
         int row = jTable1.getSelectedRow();
         
         if(row == -1){
-//            PatientForm patientForm = new PatientForm(this);
-//            patientForm.setVisible(true);
+            DocterForm docterForm = new DocterForm(this);
+            docterForm.setVisible(true);
         }else{
             
         }
@@ -194,27 +194,16 @@ public class DocterList extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null,  "No Record Selected");
             return;
         }else{
-//            PatientForm patientForm = new PatientForm(this);
-// 
-//            patient = patientTM.getList(row);
-//            
-//            System.out.println("Model >>>"+patient);
-//            
-//            patientForm.getjTextField3().setEnabled(false);
-//            patientForm.getjTextField3().setText(patient.getIdpatient());
-//            patientForm.getjTextField1().setText(patient.getNamepatient());
-//            patientForm.getjSpinner1().setValue(patient.getAge());
-//
-//            if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Laki - laki") == true){
-//                patientForm.getjRadioButton1().setSelected(true);
-//            }else if(jTable1.getValueAt(jTable1.getSelectedRow(), 3).toString().equals("Perempuan") == true){
-//                patientForm.getjRadioButton2().setSelected(true);
-//            }
-//            
-//            patientForm.getjXDatePicker1().setDate(patient.getBod());
-//            patientForm.getjTextField2().setText(patient.getAddres());
-//            
-//            patientForm.setVisible(true);
+            DocterForm docterForm = new DocterForm(this);
+ 
+            doctor = docterTM.getList(row);
+            
+            System.out.println("Model >>>"+doctor);
+
+            docterForm.getjTextField3().setText(doctor.getDoctercode());
+            docterForm.getjTextField1().setText(doctor.getDoctername());
+
+            docterForm.setVisible(true);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
     //Delete
